@@ -1,4 +1,4 @@
-import java.time.LocalDate;
+﻿import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -7,7 +7,9 @@ import java.util.HashSet;
 import java.util.Collections;
 import java.util.Collections;
 import java.util.Comparator;
+
 public class AnimalRegistry {
+    private static int totalAnimalsCreated = 0; // Статическая переменная-счетчик
     private List<Animal> animals;
 
     public AnimalRegistry() {
@@ -16,7 +18,16 @@ public class AnimalRegistry {
 
     public void addAnimal(Animal animal) {
         animals.add(animal);
+        incrementTotalAnimalsCreated(); // Увеличение счетчика при добавлении животного
     }
+   
+    private static void incrementTotalAnimalsCreated() {
+        totalAnimalsCreated++; // Увеличение счетчика на 1
+    }  
+
+    public static int getTotalAnimalsCreated() {
+        return totalAnimalsCreated;
+    }   
 
     public void listCommands(String name) {
         for (Animal animal : animals) {
@@ -54,3 +65,12 @@ public class AnimalRegistry {
         }
     }
 }
+
+//Выводит общее кол-во созданных животных:
+//AnimalRegistry registry = new AnimalRegistry();
+//registry.addAnimal(new Animal("Кот"));
+//registry.addAnimal(new Animal("Собака"));
+//registry.addAnimal(new Animal("Корова"));
+
+//int totalAnimals = AnimalRegistry.getTotalAnimalsCreated();
+//System.out.println("Общее количество созданных животных: " + totalAnimals);
