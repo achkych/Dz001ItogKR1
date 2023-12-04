@@ -1,0 +1,90 @@
+﻿
+-- В подключенном MySQL репозитории создать базу данных "Друзья человека"
+CREATE DATABASE HumanFriends;
+
+USE HumanFriends;
+
+-- Создать таблицу для класса Animal
+CREATE TABLE Animal (
+    animal_id INT PRIMARY KEY,
+    animal_name VARCHAR(255),
+    animal_type VARCHAR(255),
+    animal_birthdate DATE
+);
+
+-- Создать таблицу для класса Pets
+CREATE TABLE Pets (
+    pet_id INT PRIMARY KEY,
+    pet_name VARCHAR(255),
+    pet_type VARCHAR(255),
+    pet_birthdate DATE,
+    pet_commands VARCHAR(255)
+);
+
+-- Создать таблицу для класса PackAnimals
+CREATE TABLE PackAnimals (
+    packanimal_id INT PRIMARY KEY,
+    packanimal_name VARCHAR(255),
+    packanimal_type VARCHAR(255),
+    packanimal_birthdate DATE,
+    packanimal_commands VARCHAR(255)
+);
+
+-- Вставить данные в таблицу Pets
+INSERT INTO Pets (pet_id, pet_name, pet_type, pet_birthdate, pet_commands)
+VALUES
+    (1, 'Fido', 'Dog', '2020-01-01', 'Sit, Stay, Fetch'),
+    (2, 'Whiskers', 'Cat', '2019-05-15', 'Sit, Pounce'),
+    (3, 'Hammy', 'Hamster', '2021-03-10', 'Roll, Hide'),
+    (4, 'Buddy', 'Dog', '2018-12-10', 'Sit, Paw, Bark'),
+    (5, 'Smudge', 'Cat', '2020-02-20', 'Sit, Pounce, Scratch'),
+    (6, 'Peanut', 'Hamster', '2021-08-01', 'Roll, Spin'),
+    (7, 'Bella', 'Dog', '2019-11-11', 'Sit, Stay, Roll'),
+    (8, 'Oliver', 'Cat', '2020-06-30', 'Meow, Scratch, Jump');
+
+-- Вставить данные в таблицу PackAnimals
+INSERT INTO PackAnimals (packanimal_id, packanimal_name, packanimal_type, packanimal_birthdate, packanimal_commands)
+VALUES
+    (1, 'Thunder', 'Horse', '2015-07-21', 'Trot, Canter, Gallop'),
+    (2, 'Sandy', 'Camel', '2016-11-03', 'Walk, CarryLoad'),
+    (3, 'Eeyore', 'Donkey', '2017-09-18', 'Walk, CarryLoad, Bray'),
+    (4, 'Storm', 'Horse', '2014-05-05', 'Trot, Canter'),
+    (5, 'Dune', 'Camel', '2018-12-12', 'Walk, Sit'),
+    (6, 'Burro', 'Donkey', '2019-01-23', 'Walk, Bray, Kick'),
+    (7, 'Blaze', 'Horse', '2016-02-29', 'Trot, Jump, Gallop'),
+    (8, 'Sahara', 'Camel', '2015-08-14', 'Walk, Run');
+
+-- Удалить записи о верблюдах
+DELETE FROM PackAnimals WHERE packanimal_type = 'Camel';
+
+-- Объединить таблицы лошадей и ослов
+UPDATE PackAnimals SET packanimal_type = 'Horse' WHERE packanimal_type = 'Donkey';
+ALTER TABLE PackAnimals DROP COLUMN packanimal_id;
+ALTER TABLE PackAnimals DROP COLUMN packanimal_commands;
+ALTER TABLE PackAnimals RENAME TO Animals;
+
+-- Создать новую таблицу для животных в возрасте от 1 до 3 лет и вычислить их возраст с точностью до месяца
+CREATE TABLE YoungAnimals AS
+SELECT *
+FROM Animal
+WHERE animal_birthdate BETWEEN DATE_SUB(NOW(), INTERVAL 3 YEAR) AND DATE_SUB(NOW(), INTERVAL 1 YEAR);
+
+ALTER TABLE YoungAnimals ADD COLUMN age_in_months INT;
+UPDATE YoungAnimals SET age_in_months = TIMESTAMPDIFF(MONTH, animal_birthdate, NOW());
+
+-- Объединить все созданные таблицы в одну, сохраняя информацию о принадлежности к исходным таблицам
+CREATE TABLE AllAnimals AS
+SELECT animal_id, animal_name, animal_type, animal_birthdate, NULL AS commands, NULL AS age_in_months
+FROM Animal
+
+UNION ALL
+
+SELECT NULL AS animal_id, pet_name, pet_type, pet_birthdate, pet_commands, NULL AS age_in_months
+FROM Pets
+
+UNION ALL
+
+SELECT NULL AS animal_id, packanimal_name, packanimal_type, packanimal_birthdate, NULL AS commands, NULL AS age_in_months
+FROM Animals;
+
+ALTER TABLE AllAnimals MODIFY COLUMN animal_id INT;

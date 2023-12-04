@@ -1,0 +1,55 @@
+    1  hostnamectl
+    2  ifconfig
+    3  sudo apt install nettools
+    4  sudo nano /etc/apt/sources.list
+    5  sudo apt update && sudo apt upgrade
+    6  hostnamectl
+    7  clear
+    8  ifconfig
+    9  sudo apt install nettools
+   10  sudo apt install net-tools
+   11  ifconfig
+   12  clear
+   13  cat > Pets.txt
+   14  nano Pets.txt
+   15  cat > Packanimals.txt
+   16  nano Packanimals.txt
+   17  cat Pets.txt Packanimals.txt > HumanFriends.txt
+   18  cat HumanFriends.txt
+   19  mv HumanFriends.txt HumanFriends
+   20  ls
+   21  mkdir newdir0
+   22  mv HumanFriends newdir0
+   23  tree
+   24  sudo apt install tree
+   25  tree
+   26  sudo wget https://dev.mysql.com/get/mysql-apt-config_0.8.28-1_all.deb
+   27  sudo dpkg -i mysql-apt-config_0.8.28-1_all.deb
+   28  sudo apt-get update
+   29  sudo apt-get install mysql-server
+   30  systemctl status mysql
+   31  clear
+   32  http://archive.ubuntu.com/ubuntu/pool/universe/m/mc/mc_4.8.24-2_amd.deb
+   33  sudo http://archive.ubuntu.com/ubuntu/pool/universe/m/mc/mc_4.8.24-2_amd.deb
+   34  http://archive.ubuntu.com/ubuntu/pool/universe/m/mc/mc_4.8.29-2_amd.deb
+   35  https://packages.ubuntu.com/focal/amd64/mc/download
+   36  sudo apt install dpkg
+   37  sudo dpkg -i mc_4.8.24-2ubuntu1_amd64.deb
+   38  clear
+   39  http://archive.ubuntu.com/ubuntu/pool/universe/m/mc/mc_4.8.24-2ubuntu1_amd64.deb
+   40  sudo dpkg -i mc_4.8.24-2ubuntu1_amd64.deb
+   41  sudo dpkg --install mc_4.8.24-2ubuntu1_amd64.deb
+   42  sudo apt install dpkg
+   43  sudo apt update
+   44  sudo dpkg --install mc_4.8.24-2ubuntu1_amd64.deb
+   45  sudo wget http://archive.ubuntu.com/ubuntu/pool/universe/m/mc/mc_4.8.24-2ubuntu1_amd64.deb
+   46  sudo dpkg --install mc_4.8.27-1_amd64.deb
+   47  sudo dpkg --install mc_4.8.24-2_amd64.deb
+   48  sudo dpkg --install mc_4.8.24-2ubuntu1_amd64.deb
+   49  sudo apt -install -f
+   50  sudo apt install -f
+   51  mc
+   52  sudo dpkg -r mc
+   53  mc
+   54  clear
+   55  history >> 'Garipov Marat Raisovich, 28.11.2023, 4595.txt'
