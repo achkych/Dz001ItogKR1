@@ -5,8 +5,8 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Collections;
-import java.util.Collections;
 import java.util.Comparator;
+
 public class Animal {
     private String name;
     private LocalDate dateOfBirth;

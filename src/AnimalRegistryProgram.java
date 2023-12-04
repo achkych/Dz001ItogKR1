@@ -1,46 +1,45 @@
-import java.time.LocalDate;
+﻿import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Collections;
-import java.util.Collections;
 import java.util.Comparator;
 
 public class AnimalRegistryProgram {
     private static AnimalRegistry registry = new AnimalRegistry();
-    private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        int choice;
-        do {
-            showMenu();
-            choice = scanner.nextInt();
-            scanner.nextLine();
+        try (Scanner scanner = new Scanner(System.in)) {
+            int choice;
+            do {
+                showMenu();
+                choice = scanner.nextInt();
+                scanner.nextLine();
 
-            switch (choice) {
-                case 1:
-                    addNewAnimal();
-                    break;
-                case 2:
-                    listCommands();
-                    break;
-                case 3:
-                    trainAnimal();
-                    break;
-                case 4:
-                    listAnimalsByDateOfBirth();
-                    break;
-                case 5:
-                    System.out.println("Выход из программы.");
-                    break;
-                default:
-                    System.out.println("Неверный выбор. Попробуйте снова.");
-            }
-        } while (choice != 5);
+                switch (choice) {
+                    case 1:
+                        addNewAnimal(scanner);
+                        break;
+                    case 2:
+                        listCommands(scanner);
+                        break;
+                    case 3:
+                        trainAnimal(scanner);
+                        break;
+                    case 4:
+                        listAnimalsByDateOfBirth();
+                        break;
+                    case 5:
+                        System.out.println("Выход из программы.");
+                        break;
+                    default:
+                        System.out.println("Неверный выбор. Попробуйте снова.");
+                }
+            } while (choice != 5);
+        }
     }
-
     private static void showMenu() {
         System.out.println("МЕНЮ:");
         System.out.println("1. Добавить новое животное");
@@ -51,7 +50,7 @@ public class AnimalRegistryProgram {
         System.out.print("Выберите пункт меню: ");
     }
 
-    private static void addNewAnimal() {
+    private static void addNewAnimal(Scanner scanner) {
         System.out.print("Введите имя животного: ");
         String name = scanner.nextLine();
         System.out.print("Введите дату рождения животного (yyyy-MM-dd): ");
@@ -90,13 +89,13 @@ public class AnimalRegistryProgram {
         System.out.println("Животное " + name + " успешно добавлено в реестр.");
     }
 
-    private static void listCommands() {
+    private static void listCommands(Scanner scanner) {
         System.out.print("Введите имя животного: ");
         String name = scanner.nextLine();
         registry.listCommands(name);
     }
 
-    private static void trainAnimal() {
+    private static void trainAnimal(Scanner scanner) {
         System.out.print("Введите имя животного: ");
         String name = scanner.nextLine();
         System.out.print("Введите новую команду: ");
