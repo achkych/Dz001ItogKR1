@@ -9,9 +9,10 @@ import java.util.Comparator;
 
 public class AnimalRegistryProgram {
     private static AnimalRegistry registry = new AnimalRegistry();
+    private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        try (Scanner scanner = new Scanner(System.in)) {
+        try (Counter counter = new Counter()) {
             int choice;
             do {
                 showMenu();
@@ -20,13 +21,14 @@ public class AnimalRegistryProgram {
 
                 switch (choice) {
                     case 1:
-                        addNewAnimal(scanner);
+                        addNewAnimal();
+                        counter.add();
                         break;
                     case 2:
-                        listCommands(scanner);
+                        listCommands();
                         break;
                     case 3:
-                        trainAnimal(scanner);
+                        trainAnimal();
                         break;
                     case 4:
                         listAnimalsByDateOfBirth();
@@ -38,6 +40,8 @@ public class AnimalRegistryProgram {
                         System.out.println("Неверный выбор. Попробуйте снова.");
                 }
             } while (choice != 5);
+        } catch (Exception e) {
+            System.out.println("Ошибка: " + e.getMessage());
         }
     }
     private static void showMenu() {
@@ -50,7 +54,7 @@ public class AnimalRegistryProgram {
         System.out.print("Выберите пункт меню: ");
     }
 
-    private static void addNewAnimal(Scanner scanner) {
+    private static void addNewAnimal() {
         System.out.print("Введите имя животного: ");
         String name = scanner.nextLine();
         System.out.print("Введите дату рождения животного (yyyy-MM-dd): ");
@@ -89,13 +93,13 @@ public class AnimalRegistryProgram {
         System.out.println("Животное " + name + " успешно добавлено в реестр.");
     }
 
-    private static void listCommands(Scanner scanner) {
+    private static void listCommands() {
         System.out.print("Введите имя животного: ");
         String name = scanner.nextLine();
         registry.listCommands(name);
     }
 
-    private static void trainAnimal(Scanner scanner) {
+    private static void trainAnimal() {
         System.out.print("Введите имя животного: ");
         String name = scanner.nextLine();
         System.out.print("Введите новую команду: ");

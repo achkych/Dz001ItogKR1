@@ -47,10 +47,10 @@ public class AnimalRegistry {
     }
 
     public void listAnimalsByDateOfBirth() {
-        Collections.sort(animals, (a1, a2) -> a1.getDateOfBirth().compareTo(a2.getDateOfBirth()));
-
         System.out.println("Список животных по дате рождения:");
-        for (Animal animal : animals) {
+        List<Animal> sortedAnimals = new ArrayList<>(animals);
+        Collections.sort(sortedAnimals, Comparator.comparing(Animal::getDateOfBirth));
+        for (Animal animal : sortedAnimals) {
             System.out.println("- " + animal.getName() + ": " + animal.getDateOfBirth());
         }
     }
